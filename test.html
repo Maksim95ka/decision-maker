@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Decision Maker - Browser Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .test-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .test-header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .test-info {
+            background: #fffbea;
+            border: 1px solid #ffd700;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .test-info h3 {
+            margin: 0 0 10px 0;
+            color: #ff9800;
+        }
+        .test-info ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .test-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        .test-btn:hover {
+            transform: scale(1.05);
+        }
+        .test-btn.primary {
+            background: #2481cc;
+            color: white;
+        }
+        .test-btn.secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .note {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🎲 Decision Maker - Тестирование</h1>
+            <p>Проверь приложение в браузере перед загрузкой в Telegram</p>
+        </div>
+
+        <div class="test-info">
+            <h3>⚠️ Режим тестирования</h3>
+            <ul>
+                <li>Telegram API недоступен в браузере</li>
+                <li>Haptic feedback не работает</li>
+                <li>Используется светлая тема по умолчанию</li>
+                <li>История сохраняется в localStorage</li>
+            </ul>
+        </div>
+
+        <div class="test-buttons">
+            <button class="test-btn primary" onclick="reloadApp()">🔄 Перезагрузить</button>
+            <button class="test-btn secondary" onclick="clearStorage()">🗑️ Очистить данные</button>
+            <button class="test-btn secondary" onclick="openFullscreen()">📱 Полный экран</button>
+        </div>
+
+        <iframe id="appFrame" src="index.html"></iframe>
+
+        <div class="note">
+            💡 Для полного тестирования загрузи приложение в Telegram через BotFather
+        </div>
+    </div>
+
+    <script>
+        function reloadApp() {
+            document.getElementById('appFrame').src = 'index.html?' + Date.now();
+        }
+
+        function clearStorage() {
+            if (confirm('Очистить всё сохранённые данные?')) {
+                const frame = document.getElementById('appFrame');
+                frame.contentWindow.localStorage.clear();
+                reloadApp();
+                alert('✅ Данные очищены!');
+            }
+        }
+
+        function openFullscreen() {
+            window.open('index.html', '_blank');
+        }
+
+        // Auto-reload on file changes (useful for development)
+        let lastUpdate = Date.now();
+        setInterval(() => {
+            // This is just a placeholder - in real development, use a dev server with hot reload
+        }, 5000);
+    </script>
+</body>
+</html>

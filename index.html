@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎲 Decision Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎲 Генератор решений</h1>
+            <p class="subtitle">Позволь случаю решить за тебя!</p>
+        </header>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="yesno">
+                <span class="mode-icon">🤔</span>
+                <span class="mode-name">Да/Нет</span>
+            </button>
+            <button class="mode-btn" data-mode="coin">
+                <span class="mode-icon">🪙</span>
+                <span class="mode-name">Монетка</span>
+            </button>
+            <button class="mode-btn" data-mode="wheel">
+                <span class="mode-icon">🎯</span>
+                <span class="mode-name">Рулетка</span>
+            </button>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Yes/No Mode -->
+            <div id="yesnoMode" class="mode-content active">
+                <div class="question-input">
+                    <input type="text" id="questionInput" placeholder="Задай свой вопрос..." maxlength="100">
+                </div>
+                <div class="result-display" id="yesnoResult">
+                    <div class="result-icon">❓</div>
+                    <div class="result-text">Нажми на кнопку!</div>
+                </div>
+                <button class="action-btn" id="yesnoBtn">
+                    <span class="btn-text">🎲 Решить!</span>
+                </button>
+            </div>
+
+            <!-- Coin Flip Mode -->
+            <div id="coinMode" class="mode-content">
+                <div class="coin-container">
+                    <div class="coin" id="coin">
+                        <div class="coin-side coin-heads">ОРЁЛ</div>
+                        <div class="coin-side coin-tails">РЕШКА</div>
+                    </div>
+                </div>
+                <div class="result-display" id="coinResult">
+                    <div class="result-text">Подбрось монетку!</div>
+                </div>
+                <button class="action-btn" id="coinBtn">
+                    <span class="btn-text">🪙 Подбросить!</span>
+                </button>
+            </div>
+
+            <!-- Wheel Mode -->
+            <div id="wheelMode" class="mode-content">
+                <div class="options-input">
+                    <div class="input-header">
+                        <label>Добавь варианты (минимум 2):</label>
+                        <span class="option-count" id="optionCount">0/10</span>
+                    </div>
+                    <div class="options-list" id="optionsList">
+                        <!-- Options will be added dynamically -->
+                    </div>
+                    <div class="add-option">
+                        <input type="text" id="optionInput" placeholder="Новый вариант..." maxlength="50">
+                        <button class="add-btn" id="addOptionBtn">➕</button>
+                    </div>
+                </div>
+                <div class="result-display" id="wheelResult">
+                    <div class="result-icon">🎯</div>
+                    <div class="result-text">Добавь варианты!</div>
+                </div>
+                <button class="action-btn" id="wheelBtn" disabled>
+                    <span class="btn-text">🎯 Выбрать!</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- History Section -->
+        <section class="history-section" id="historySection">
+            <div class="history-header">
+                <h3>📜 История решений</h3>
+                <button class="clear-btn" id="clearHistoryBtn">Очистить</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="empty-history">
+                    <span>История пуста</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="telegram.js"></script>
+</body>
+</html>
